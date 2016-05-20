@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  vars:
+    test_dest_dir: ~/test_dockerfile
+
+  # Execute role in normal way.
+  roles:
+    - role: "{{ playbook_dir }}/../"
+      dest: "{{ test_dest_dir }}"
+      from: scratch:latest
+      maintainer: test
+      instructions:
+        - ADD /foo /bar
+        - CMD foo.sh
+
+  tasks:
+    # Check if Dockerfile rendered successfully
+    - stat: path="{{ test_dest_dir }}"
+      register: result
+
+    - file: path="{{ test_dest_dir }}" state=absent
+
+    - name: role should render dockerfile to dest
+      assert: { that: "result.stat.exists" }
+
+    # Check if invalid Dockerfile instruction type make role fail.
+    - block:
+        - include: ../tasks/main.yml
+          tags: ['validate']
+          vars:
+            - instructions:
+                - HELLO this should fail
+
+        - name: validation fail
+          set_fact: validation_fail=true
+
+      rescue:
+        - name: validation success
+          set_fact: validation_fail=false
+      always:
+        - assert: { that: "not validation_fail" }
