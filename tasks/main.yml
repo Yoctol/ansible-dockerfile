@@ -8,5 +8,17 @@
   tags: ['validate']
 
 - name: make dockerfile
-  template: "{{ template_options | combine({ 'src': 'Dockerfile', 'dest': dest }) }}"
+  template:
+    src: Dockerfile
+    dest: "{{ dest }}"
+    owner: "{{ template_options['owner'] | default(omit) }}"
+    group: "{{ template_options['backup'] | default(omit) }}"
+    mode: "{{ template_options['backup'] | default(omit) }}"
+    backup: "{{ template_options['backup'] | default(omit) }}"
+    force: "{{ template_options['force'] | default(omit) }}"
+    validate: "{{ template_options['validate'] | default(omit) }}"
+    selevel: "{{ template_options['selevel'] | default(omit) }}"
+    serole: "{{ template_options['serole'] | default(omit) }}"
+    setype: "{{ template_options['setype'] | default(omit) }}"
+    seuser: "{{ template_options['seuser'] | default(omit) }}"
   tags: ['render']
