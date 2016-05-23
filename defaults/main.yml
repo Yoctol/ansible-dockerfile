@@ -1,6 +1,19 @@
 ---
-template_options: {}
-show_role_comment: true
-from: scratch
+# Required, the path to render docker file on the host.
 dest: ~/Dockerfile
+
+# Optional, the args of template module except `src` and `dest`.
+template_options: {}
+
+# Opitonal, whether to show details in comments.
+show_role_comment: true
+
+# Required, the image name to be used in FROM instruciton as the base image.
+from: scratch
+
+# Optional, the maintainer to be used in MAINTAINER isntruction.
+matainer: ''
+
+# Optional, other instructions to be written in dockerfile.
+# It would fail if invalid instruction is used.
 instructions: []

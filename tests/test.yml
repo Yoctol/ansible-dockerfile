@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   vars:
-    test_dest_dir: ~/test_dockerfile
+    test_dest_dir: ~/this_is_a_test_dockerfile
 
   # Execute role in normal way.
   roles:
@@ -32,10 +32,10 @@
                 - HELLO this should fail
 
         - name: validation fail
-          set_fact: validation_fail=true
+          set_fact: validation_fail=false
 
       rescue:
         - name: validation success
-          set_fact: validation_fail=false
+          set_fact: validation_fail=true
       always:
-        - assert: { that: "not validation_fail" }
+        - assert: { that: "validation_fail" }
