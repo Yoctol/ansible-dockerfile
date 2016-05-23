@@ -1,9 +1,9 @@
 ---
 - assert:
     that: >
-      item.split(' ')[0] in ['MAINTAINER', 'RUN', 'CMD', 'LABEL', 'EXPOSE',
-                             'ENV', 'ADD', 'COPY', 'ENTRYPOINT', 'VOLUME',
-                             'USER', 'WORKDIR', 'ARG', 'ONBUILD', 'STOPSIGNAL']
+      item.split(' ')[0] in
+      ['MAINTAINER', 'RUN', 'CMD', 'LABEL', 'EXPOSE', 'ENV', 'ADD', 'COPY',
+      'ENTRYPOINT', 'VOLUME', 'USER', 'WORKDIR', 'ARG', 'ONBUILD', 'STOPSIGNAL']
   with_items: "{{ instructions }}"
   tags: ['validate']
 

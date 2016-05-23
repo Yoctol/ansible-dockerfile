@@ -1,38 +1,62 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Role to render dockerfile with ease.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Ansible >= 1.2
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```yaml
+---
+# Required, the path to render docker file on the host.
+dest: ~/Dockerfile
 
-Dependencies
-------------
+# Optional, the args of template module except `src` and `dest`.
+template_options: {}
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+# Opitonal, whether to show details in comments.
+show_role_comment: true
+
+# Required, the image name to be used in FROM instruciton as the base image.
+from: scratch
+
+# Optional, the maintainer to be used in MAINTAINER isntruction.
+matainer: ''
+
+# Optional, other instructions to be written in dockerfile.
+# It would fail if invalid instruction is used.
+instructions: []
+```
+
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: servers
+  roles:
+     - role: dockerfile
+       dest: ~/docker/Dockerfile
+       template_options: owner=root mode=u=rw,g=r,o=r
+       show_role_comment: true
+       from: python:latest
+       matainer: me
+       instructions:
+         - ADD /my/app /to/app/path
+         - CMD /init.sh
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Yoctol Info Inc.
