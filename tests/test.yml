@@ -8,7 +8,6 @@
     - role: "{{ playbook_dir }}/../"
       dest: "{{ test_dest_dir }}"
       from: scratch:latest
-      maintainer: test
       instructions:
         - ADD /foo /bar
         - CMD foo.sh

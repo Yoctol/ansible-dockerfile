@@ -26,7 +26,7 @@ show_role_comment: true
 from: scratch
 
 # Optional, the maintainer to be used in MAINTAINER isntruction.
-matainer: ''
+maintainer: ''
 
 # Optional, other instructions to be written in dockerfile.
 # It would fail if invalid instruction is used.
