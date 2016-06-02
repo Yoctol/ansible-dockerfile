@@ -12,24 +12,24 @@ Role Variables
 --------------
 
 ```yaml
----
-# Required, the path to render docker file on the host.
+# Required, the path where dockerfile to be rendered on the host.
 dest: ~/Dockerfile
 
-# Optional, the args of template module except `src` and `dest`.
+# Optional, the args of ansible template module except `src` and `dest`.
+# Check http://docs.ansible.com/ansible/template_module.html.
 template_options: {}
 
-# Opitonal, whether to show details in comments.
+# Opitonal, whether to show the details of role in comments. Default true.
 show_role_comment: true
 
-# Required, the image name to be used in FROM instruciton as the base image.
+# Required, the image to be used in FROM instruciton as the base image.
 from: scratch
 
-# Optional, the maintainer to be used in MAINTAINER isntruction.
+# Optional, the maintainer to be used in MAINTAINER instruction.
 maintainer: ''
 
 # Optional, other instructions to be written in dockerfile.
-# It would fail if invalid instruction is used.
+# It would fail if invalid instruction type is used.
 instructions: []
 ```
 
